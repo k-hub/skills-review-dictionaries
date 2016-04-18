@@ -236,16 +236,12 @@ def get_sum_zero_pairs(numbers):
         if new_numbers[i] == 0:
             zero_pair = [new_numbers[i], new_numbers[i]]
             pairs_summing_zero.append(zero_pair)
-
-        # pair = [new_numbers[index], new_numbers[i + 1]]
-        # print "New pair:", pair
-
-        if new_numbers[i] - new_numbers[i + 1] == 0 or new_numbers[i] + new_numbers[i + 1] == 0:
-            pair = [new_numbers[i], new_numbers[i + 1]]
-            print "Current pair: ", pair
-
+        if new_numbers[index] - new_numbers[i + 1] == 0 or new_numbers[index] + new_numbers[i + 1] == 0:
+            print new_numbers[index]
+            pair = [new_numbers[index], new_numbers[i + 1]]
+            # print "Current pair: ", pair
             pairs_summing_zero.append(pair)
-            # index += 1
+            index += 1
 
     return pairs_summing_zero
 
@@ -287,41 +283,38 @@ def kids_game(names):
     a dictionary (with the super-fast lookup they provide) can help;
     good solutions here will definitely require a dictionary.
     """
-    # words = [names[0]]
-
-    # first_word = names[0]
 
     last_letter_new_word = {}
 
-    outcome = []
+    words = []
+
+    outcome = [names[0]]
+
 
     for name in names:
-        # print "This is the name: ", name
-        # last_letter_new_word[name[-1]] = []  # last letter of each word added as a key with an empty list value
-        # last_letter_new_word.setdefault(name[-1], []).append(name)  # Creating the dictionary based on the last letter of each word but appending word that has the same last letter as the key
-        last_letter_new_word.setdefault(name[-1], [])  # dictionary keys of all last letters with empty list values
-         
+        if name[-1] not in last_letter_new_word:
+            last_letter_new_word.setdefault(name[-1], [])  # Add the last letter of each word as keys with empty lists as values to the dictionary.
+
+
     for name in names:
-        if name[0] in last_letter_new_word.keys():
-            last_letter_new_word.get(name[0], name)
+        if name[0] in last_letter_new_word:
+            words = last_letter_new_word[name[0]]
+            words.append([name])
 
-    # for name in names:
-    #     if name[-1] in last_letter_new_word.keys():
-    #          outcome.append(last_letter_new_word[name[-1]])
+    # Iterate through the names list then iterate again through the name to get
+    #the last letter in that name.
+    for name in names: 
+        for last_letter in name:
+            last_letter_in_name = name[-1]
+            if name[-1] in last_letter_new_word:
+                pass
+                # Get the value from the dictionary and append it to outcome.
 
 
-        # if name[0] in last_letter_new_word.keys():
-        #     last_letter_new_word[name[-1]] = name
-        # print "This is the dictionary: ", last_letter_new_word
 
+    # print last_letter_new_word
+    print outcome
 
-    # for name in names:
-    #     if name[0] in last_letter_new_word.keys():
-    #         # take the name and add it to a value to one of the keys in the dictionary
-    #         # dictionary[key] = [name]
-    #         last_letter_new_word[name[0]].append(name)
-
-    print last_letter_new_word
     # print outcome
     # return last_letter_new_word
 
